@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+   \node [block] (init) {inicializar};
+   \node [cloud, left of=init] (dados) {dados};
+   \node [block, below of=init] (identify) {identificar modelo};
+   \node [block, below of=identify] (evaluate) {avaliar modelo};
+   \node [block, left of=evaluate] (update) {atualizar};
+   \node [decision, below of=evaluate] (decide) {o modelo é válido?};
+   \node [block, below of=decide] (stop) {pare};
+   \node [block, below of=stop] (teste) {sair};
+   \path [line,dashed] (dados) -- (init);
+   \path [line] (init) -- (identify);
+   \path [line] (identify) -- (evaluate);
+   \path [line] (evaluate) -- (decide);
+   \path [line] (decide) -| node [near start] {não} (update);
+   \path [line] (update) |- (identify);
+   \path [line] (decide) -- node {sim}(stop);
+   \path [line] (stop) -- (teste);
+\end{tikzpicture}
